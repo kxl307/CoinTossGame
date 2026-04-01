@@ -3,6 +3,7 @@ import {
   BASE_TAIL_CHANCE,
   STARTING_MONEY,
   TARGET_STREAK,
+  PER_HEAD_PAYOUT,
 } from './config.js';
 
 /**
@@ -23,5 +24,6 @@ export function createInitialGameState() {
     totalTosses: 0,
     totalHeads: 0,
     targetStreak: TARGET_STREAK,
+    perHeadPayout: PER_HEAD_PAYOUT,
   };
 }

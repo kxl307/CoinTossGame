@@ -1,4 +1,4 @@
-import { PER_HEAD_PAYOUT, TARGET_STREAK } from './config.js';
+import { PER_HEAD_PAYOUT as DEFAULT_PAYOUT, TARGET_STREAK } from './config.js';
 
 /**
  * Pure coin roll — returns 'heads' if randomValue < headChance, else 'tails'.
@@ -18,6 +18,7 @@ export function resolveToss(state, randomValue) {
 
   const outcome = rollCoin(randomValue, state.headChance);
   const history = [...state.history];
+  const payout = state.perHeadPayout ?? DEFAULT_PAYOUT;
   let { currentStreak, bestStreak, money, totalTosses, totalHeads, isGameOver } = state;
 
   totalTosses += 1;
@@ -25,10 +26,10 @@ export function resolveToss(state, randomValue) {
   if (outcome === 'heads') {
     totalHeads += 1;
     currentStreak += 1;
-    money += PER_HEAD_PAYOUT;
+    money += payout;
     if (currentStreak > bestStreak) bestStreak = currentStreak;
 
-    history.push(`Heads! Streak is now ${currentStreak}. Earned $${PER_HEAD_PAYOUT}.`);
+    history.push(`Heads! Streak is now ${currentStreak}. Earned $${payout}.`);
 
     if (currentStreak >= TARGET_STREAK) {
       isGameOver = true;
