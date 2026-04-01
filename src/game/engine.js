@@ -1,4 +1,5 @@
 import { WIN_STREAK, HEAD_REWARD, STREAK_BONUS } from './config.js';
+import { getRewardBonus } from './upgrades.js';
 
 export function resolveToss(randomValue, headsChance) {
   return randomValue < headsChance ? 'heads' : 'tails';
@@ -13,7 +14,8 @@ export function applyTossResult(state, randomValue) {
 
   if (outcome === 'heads') {
     state.streak++;
-    const reward = HEAD_REWARD + state.streak * STREAK_BONUS;
+    const bonus = getRewardBonus(state);
+    const reward = HEAD_REWARD + state.streak * STREAK_BONUS + bonus;
     state.lastReward = reward;
     state.balance += reward;
     state.lifetimeEarnings += reward;

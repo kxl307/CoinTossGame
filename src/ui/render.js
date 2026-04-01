@@ -1,3 +1,5 @@
+import { UPGRADE_CATALOG, canPurchaseUpgrade, getPurchaseCount } from '../game/upgrades.js';
+
 export function renderGame(state) {
   // Status bar
   const streakEl = document.getElementById('streak-value');
@@ -56,10 +58,10 @@ export function renderGame(state) {
   // Stats panel
   renderStats(state);
 
-  // Upgrades panel (wired in PLAN-03)
-  if (typeof renderUpgrades === 'function') renderUpgrades(state);
+  // Upgrades panel
+  renderUpgrades(state);
 
-  // History panel (wired in PLAN-04)
+  // History panel
   renderHistory(state);
 }
 
@@ -88,5 +90,25 @@ function renderHistory(state) {
     else if (entry.type === 'upgrade') cls = 'h-upgrade';
     else if (entry.type === 'win') cls = 'h-win';
     return `<div class="history-entry ${cls}">${entry.message}</div>`;
+  }).join('');
+}
+
+function renderUpgrades(state) {
+  const el = document.getElementById('upgrade-list');
+  if (!el) return;
+
+  el.innerHTML = UPGRADE_CATALOG.map(u => {
+    const owned = getPurchaseCount(state, u.id);
+    const affordable = canPurchaseUpgrade(state, u.id);
+    return `
+      <div class="upgrade-item">
+        <div class="upgrade-info">
+          <div class="upgrade-name">${u.name}</div>
+          <div class="upgrade-desc">${u.description} — $${u.cost}</div>
+          <div class="upgrade-owned">Owned: ${owned}/${u.maxPurchases}</div>
+        </div>
+        <button class="buy-btn" data-upgrade-id="${u.id}" ${affordable ? '' : 'disabled'}>Buy</button>
+      </div>
+    `;
   }).join('');
 }
