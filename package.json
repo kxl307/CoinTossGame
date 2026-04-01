@@ -1,0 +1,9 @@
+{
+  "name": "coin-toss-game",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "A coin toss progression game where the player wins by reaching 10 consecutive heads.",
+  "scripts": {
+    "test": "node --test"
+  }
+}

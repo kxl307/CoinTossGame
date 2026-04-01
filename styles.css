@@ -1,0 +1,123 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  background: #1a1a2e;
+  color: #e0e0e0;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 0.25rem;
+  color: #ffd700;
+}
+
+h1 + p {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  opacity: 0.7;
+}
+
+section {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border-radius: 8px;
+  background: #16213e;
+}
+
+#status div {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+#toss-btn {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  background: #e94560;
+  color: #fff;
+  transition: background 0.2s;
+}
+
+#toss-btn:hover:not(:disabled) {
+  background: #c73750;
+}
+
+#toss-btn:disabled {
+  background: #555;
+  cursor: not-allowed;
+}
+
+h2 {
+  margin-bottom: 0.75rem;
+  color: #ffd700;
+  font-size: 1.1rem;
+}
+
+#upgrade-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.upgrade-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  border-radius: 6px;
+  background: #0f3460;
+}
+
+.upgrade-card button {
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 4px;
+  background: #e94560;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.upgrade-card button:disabled {
+  background: #555;
+  cursor: not-allowed;
+}
+
+#history-log {
+  list-style: decimal inside;
+  max-height: 250px;
+  overflow-y: auto;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+#history-log li {
+  padding: 0.2rem 0;
+  border-bottom: 1px solid #1a1a2e;
+}
+
+#game-over-message {
+  text-align: center;
+  background: #0a4d2e;
+  padding: 1.5rem;
+}
+
+#game-over-message h2 {
+  font-size: 1.5rem;
+  color: #ffd700;
+}
