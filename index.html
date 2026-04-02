@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coin Toss Game</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <h1>🪙 Coin Toss Game</h1>
+    <p id="status-message">Toss the coin to begin!</p>
+
+    <section id="game-state">
+      <div class="stat">
+        <span class="label">Streak</span>
+        <span id="streak">0</span> / <span id="max-streak">10</span>
+      </div>
+      <div class="stat">
+        <span class="label">Head Chance</span>
+        <span id="head-chance">10.0%</span>
+      </div>
+      <div class="stat">
+        <span class="label">Money</span>
+        $<span id="money">0</span>
+      </div>
+      <div class="stat">
+        <span class="label">Total Tosses</span>
+        <span id="total-tosses">0</span>
+      </div>
+      <div class="stat">
+        <span class="label">Last Outcome</span>
+        <span id="last-outcome">—</span>
+      </div>
+    </section>
+
+    <section id="controls">
+      <button id="toss-btn">🪙 Toss Coin</button>
+    </section>
+
+    <section id="upgrades">
+      <h2>Upgrades</h2>
+      <div id="upgrade-list"></div>
+    </section>
+
+    <section id="history">
+      <h2>History</h2>
+      <div id="history-list"></div>
+    </section>
+  </div>
+
+  <script type="module">
+    import { initApp } from './src/ui.js';
+    initApp();
+  </script>
+</body>
+</html>
