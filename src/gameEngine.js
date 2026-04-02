@@ -13,18 +13,20 @@ export function resolveToss(state, roll) {
   const isHeads = roll < state.effectiveHeadChance;
   const newStreak = isHeads ? state.streak + 1 : 0;
   const won = newStreak >= state.maxStreak;
+  const moneyEarned = isHeads ? (state.moneyPerHead || 5) : 0;
 
   return {
     ...state,
     lastOutcome: isHeads ? 'heads' : 'tails',
     streak: newStreak,
     totalTosses: state.totalTosses + 1,
+    money: state.money + moneyEarned,
     gameOver: won,
     won,
     statusMessage: won
       ? `🎉 ${state.maxStreak} consecutive heads reached — you win!`
       : isHeads
-        ? `Heads! Streak: ${newStreak}`
+        ? `Heads! Streak: ${newStreak} | +$${moneyEarned}`
         : 'Tails — streak reset to 0.',
   };
 }
