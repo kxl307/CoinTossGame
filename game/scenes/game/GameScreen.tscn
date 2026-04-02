@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://gamescreen001"]
+[gd_scene load_steps=7 format=3 uid="uid://gamescreen001"]
 
 [ext_resource type="Script" path="res://scripts/ui/GameScreen.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/ui/TossPanel.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://scenes/ui/HistoryPanel.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://scenes/ui/RightProgressionPanel.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://scenes/ui/EndingOverlay.tscn" id="5"]
 
 [sub_resource type="StyleBoxFlat" id="bg"]
 bg_color = Color(0.035, 0.03, 0.025, 1)
@@ -87,9 +89,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 1.0
 
-[node name="Placeholder" type="Label" parent="MarginContainer/VBox/Columns/RightColumn"]
+[node name="RightProgressionPanel" parent="MarginContainer/VBox/Columns/RightColumn" instance=ExtResource("4")]
 layout_mode = 2
-theme_override_font_sizes/font_size = 14
-theme_override_colors/font_color = Color(0.35, 0.33, 0.3, 1)
-text = "AUGMENTATIONS"
-horizontal_alignment = 1
+size_flags_vertical = 3
+
+[node name="EndingOverlay" parent="." instance=ExtResource("5")]
+layout_mode = 1
