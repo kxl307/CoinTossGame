@@ -12,6 +12,7 @@
 5. **Ending**: Reaching the win condition should trigger a **profound narrative ending**, not a simple victory message.
 6. **Save behavior**: Progress should be saved between sessions in v1.
 7. **Post-win save lock**: After the player reaches the goal on a save file, that same save should no longer be playable.
+8. **UI inspiration**: The user wants the game to feel visually similar to the provided reference image: moody pixel art, a single-screen layout, and a dense but readable presentation of toss controls, result/history, stats, and upgrades.
 
 ## Requirements Clarified
 - **Platform / UI direction**: This is not a terminal prototype; it should be a Godot-based game experience.
@@ -19,6 +20,8 @@
 - **Progression scope**: The user wants a foundation that supports deepening complexity, not a minimal one-note toss simulator.
 - **Feedback loop**: Tosses should feel tangible through animation, and progression should affect that feel.
 - **Completion state**: Winning is final for a save file and should feel narratively significant.
+- **UI layout direction**: The preferred direction is a single-screen game view with the main toss interaction on the left, a visible vertical history/event feed in the middle, and purchasable upgrades or progression controls on the right.
+- **Visual style**: The player is pointing toward a dark, atmospheric, retro pixel-art interface rather than a clean abstract prototype.
 
 ## Out of Scope (confirmed)
 - **CLI / terminal implementation**: Rejected in favor of a Godot 4 game.
@@ -31,7 +34,8 @@
 - **Meta-progression structure**: The game should save progress, but the exact long-term progression model is not yet defined.
 - **Save model details**: It is clear that a completed save cannot continue, but whether players can create fresh save slots or restart in a separate profile was not explicitly discussed.
 - **UI structure**: No final decision yet on screen layout for toss controls, history log, upgrades, abilities, and event presentation.
+- **Exact fidelity to the reference**: The image clearly establishes the desired structure and mood, but the exact degree of imitation versus adaptation remains open.
 - **Balance**: Payout values, base odds tuning, animation timing, and expected run length are still open.
 
 ## Recommendation for Planner
-Plan v1 as a **Godot 4 atmospheric progression game** built around the core toss loop, visible history, animated coin feedback, persistent save data, and a definitive narrative ending that locks the completed save. Since the user wants long-term depth, structure the architecture so upgrades, abilities, random events, and meta-progression are separate systems that can expand cleanly. For the first playable version, prioritize a polished vertical slice over full content breadth: one strong end-to-end loop with at least initial implementations of progression, history, saving, and ending flow.
+Plan v1 as a **Godot 4 atmospheric progression game** built around the core toss loop, visible history, animated coin feedback, persistent save data, and a definitive narrative ending that locks the completed save. Treat the provided image as a strong UX reference: prioritize a single-screen layout where toss action, current stats, history feed, and upgrades are all visible without extra navigation, and lean into dark pixel-art presentation. Since the user wants long-term depth, structure the architecture so upgrades, abilities, random events, and meta-progression are separate systems that can expand cleanly. For the first playable version, prioritize a polished vertical slice over full content breadth: one strong end-to-end loop with at least initial implementations of progression, history, saving, ending flow, and the reference-inspired interface structure.
