@@ -1,6 +1,7 @@
 import { createInitialState } from './gameState.js';
 import { resolveToss, canToss } from './gameEngine.js';
 import { UPGRADES, purchaseUpgrade, applyUpgradeEffects } from './upgrades.js';
+import { createHistoryEntry, appendHistory } from './history.js';
 
 let state = createInitialState();
 
@@ -19,10 +20,7 @@ export function renderGame() {
   tossBtn.disabled = !canToss(state);
 
   renderUpgrades();
-
-  // History section placeholder — wired in PLAN-03
-  const historySection = $('#history-list');
-  if (historySection) historySection.innerHTML = '<p class="placeholder">History coming soon…</p>';
+  renderHistory();
 }
 
 function renderUpgrades() {
@@ -67,7 +65,52 @@ function handlePurchase(upgradeId) {
   const result = purchaseUpgrade(state, upgradeId);
   if (!result) return;
   state = applyUpgradeEffects(result);
+
+  const upgrade = UPGRADES.find(u => u.id === upgradeId);
+  state = appendHistory(state, createHistoryEntry('purchase', {
+    upgradeName: upgrade.name,
+    cost: upgrade.cost,
+    effectiveHeadChance: state.effectiveHeadChance,
+  }));
+  state = { ...state, statusMessage: `Purchased ${upgrade.name}! Head chance now ${(state.effectiveHeadChance * 100).toFixed(1)}%` };
+
   renderGame();
+}
+
+function renderHistory() {
+  const container = $('#history-list');
+  if (!container) return;
+  container.innerHTML = '';
+
+  if (state.history.length === 0) {
+    container.innerHTML = '<p class="placeholder">No events yet. Start tossing!</p>';
+    return;
+  }
+
+  for (const entry of state.history) {
+    const div = document.createElement('div');
+    div.className = `history-entry history-${entry.type}`;
+    div.textContent = formatHistoryEntry(entry);
+    container.appendChild(div);
+  }
+
+  // Auto-scroll to latest
+  container.scrollTop = container.scrollHeight;
+}
+
+function formatHistoryEntry(entry) {
+  switch (entry.type) {
+    case 'toss':
+      return entry.outcome === 'heads'
+        ? `🪙 Heads! Streak: ${entry.streak} | +$${entry.moneyDelta}`
+        : `🪙 Tails — streak reset to 0`;
+    case 'purchase':
+      return `🛒 Bought ${entry.upgradeName} for $${entry.cost} → head chance now ${(entry.effectiveHeadChance * 100).toFixed(1)}%`;
+    case 'win':
+      return `🏆 Victory! Reached ${entry.streak} consecutive heads!`;
+    default:
+      return `[${entry.type}]`;
+  }
 }
 
 function handleToss() {

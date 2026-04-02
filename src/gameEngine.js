@@ -1,4 +1,5 @@
 import { createInitialState } from './gameState.js';
+import { createHistoryEntry, appendHistory } from './history.js';
 
 /**
  * Resolve a single coin toss against the current state.
@@ -15,7 +16,13 @@ export function resolveToss(state, roll) {
   const won = newStreak >= state.maxStreak;
   const moneyEarned = isHeads ? (state.moneyPerHead || 5) : 0;
 
-  return {
+  const statusMessage = won
+    ? `🎉 ${state.maxStreak} consecutive heads reached — you win!`
+    : isHeads
+      ? `Heads! Streak: ${newStreak} | +$${moneyEarned}`
+      : 'Tails — streak reset to 0.';
+
+  let next = {
     ...state,
     lastOutcome: isHeads ? 'heads' : 'tails',
     streak: newStreak,
@@ -23,12 +30,25 @@ export function resolveToss(state, roll) {
     money: state.money + moneyEarned,
     gameOver: won,
     won,
-    statusMessage: won
-      ? `🎉 ${state.maxStreak} consecutive heads reached — you win!`
-      : isHeads
-        ? `Heads! Streak: ${newStreak} | +$${moneyEarned}`
-        : 'Tails — streak reset to 0.',
+    statusMessage,
   };
+
+  // Emit toss history entry
+  next = appendHistory(next, createHistoryEntry('toss', {
+    outcome: isHeads ? 'heads' : 'tails',
+    moneyDelta: moneyEarned,
+    streak: newStreak,
+  }));
+
+  // Emit win entry if game just ended
+  if (won) {
+    next = appendHistory(next, createHistoryEntry('win', {
+      streak: newStreak,
+      message: statusMessage,
+    }));
+  }
+
+  return next;
 }
 
 /**
