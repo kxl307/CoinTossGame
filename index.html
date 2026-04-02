@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coin Toss Game</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🪙 Coin Toss Game</h1>
+    <p class="subtitle">Get 10 consecutive heads to win!</p>
+
+    <div id="game-over-banner" class="game-over-banner hidden"></div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">Current Streak</div>
+        <div id="current-streak" class="stat-value">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Best Streak</div>
+        <div id="best-streak" class="stat-value">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Progress</div>
+        <div id="progress" class="stat-value">0 / 10</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Money</div>
+        <div id="money" class="stat-value">$0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Head Chance</div>
+        <div id="head-chance" class="stat-value">10.0%</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Tosses</div>
+        <div id="toss-count" class="stat-value">0</div>
+      </div>
+    </div>
+
+    <button id="toss-btn" class="toss-btn">Toss Coin</button>
+
+    <div class="section">
+      <h2>Upgrades</h2>
+      <div id="upgrades-container" class="upgrades-container"></div>
+    </div>
+
+    <div class="section">
+      <h2>History</h2>
+      <div id="history-container" class="history-container"></div>
+    </div>
+  </div>
+
+  <script src="src/app.js" type="module"></script>
+</body>
+</html>

@@ -1,0 +1,182 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #1a1a2e;
+  color: #e0e0e0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.container {
+  max-width: 600px;
+  width: 100%;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 0.25rem;
+}
+
+.subtitle {
+  text-align: center;
+  color: #888;
+  margin-bottom: 1.5rem;
+}
+
+.game-over-banner {
+  background: #2d6a4f;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat-card {
+  background: #16213e;
+  border-radius: 8px;
+  padding: 0.75rem;
+  text-align: center;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: #888;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+
+.stat-value {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #e0e0e0;
+}
+
+.toss-btn {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  background: #e94560;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+  transition: background 0.2s;
+}
+
+.toss-btn:hover:not(:disabled) {
+  background: #c81e45;
+}
+
+.toss-btn:disabled {
+  background: #555;
+  cursor: not-allowed;
+}
+
+.section {
+  margin-bottom: 1.5rem;
+}
+
+.section h2 {
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid #333;
+  padding-bottom: 0.25rem;
+}
+
+.upgrades-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.upgrade-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: #16213e;
+  border: 1px solid #333;
+  border-radius: 8px;
+  color: #e0e0e0;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.2s;
+}
+
+.upgrade-btn:hover:not(:disabled) {
+  background: #1a2744;
+}
+
+.upgrade-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.upgrade-btn.purchased {
+  border-color: #2d6a4f;
+  opacity: 0.6;
+}
+
+.upgrade-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.upgrade-name {
+  font-weight: bold;
+}
+
+.upgrade-detail {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.upgrade-cost {
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.history-container {
+  max-height: 250px;
+  overflow-y: auto;
+  background: #16213e;
+  border-radius: 8px;
+  padding: 0.75rem;
+}
+
+.history-entry {
+  padding: 0.3rem 0;
+  border-bottom: 1px solid #222;
+  font-size: 0.85rem;
+  color: #bbb;
+}
+
+.history-entry:last-child {
+  border-bottom: none;
+}

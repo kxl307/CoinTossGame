@@ -1,0 +1,8 @@
+{
+  "name": "coin-toss-game",
+  "version": "1.0.0",
+  "description": "A coin toss game where the player wins by reaching 10 consecutive heads",
+  "scripts": {
+    "test": "node --test tests/gameLogic.test.js"
+  }
+}
