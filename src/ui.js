@@ -19,6 +19,14 @@ export function renderGame() {
   const tossBtn = $('#toss-btn');
   tossBtn.disabled = !canToss(state);
 
+  // Show/hide reset button and add won styling
+  const resetBtn = $('#reset-btn');
+  if (resetBtn) {
+    resetBtn.style.display = state.gameOver ? 'inline-block' : 'none';
+  }
+  const statusEl = $('#status-message');
+  statusEl.classList.toggle('won', state.won);
+
   renderUpgrades();
   renderHistory();
 }
@@ -123,6 +131,13 @@ function handleToss() {
 export function initApp() {
   renderGame();
   $('#toss-btn').addEventListener('click', handleToss);
+  const resetBtn = $('#reset-btn');
+  if (resetBtn) {
+    resetBtn.addEventListener('click', () => {
+      state = createInitialState();
+      renderGame();
+    });
+  }
 }
 
 export function getState() { return state; }

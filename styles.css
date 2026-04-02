@@ -1,0 +1,242 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #1a1a2e;
+  color: #e0e0e0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+#app {
+  max-width: 600px;
+  width: 100%;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: #ffd700;
+}
+
+h2 {
+  font-size: 1.2rem;
+  margin-bottom: 0.75rem;
+  color: #ffd700;
+  border-bottom: 1px solid #333;
+  padding-bottom: 0.25rem;
+}
+
+#status-message {
+  text-align: center;
+  font-size: 1.1rem;
+  padding: 0.75rem;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  background: #16213e;
+  min-height: 2.5rem;
+}
+
+#status-message.won {
+  background: #2d5016;
+  color: #7fff00;
+  font-weight: bold;
+}
+
+/* Game state stats */
+#game-state {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat {
+  background: #16213e;
+  border-radius: 8px;
+  padding: 0.75rem;
+  text-align: center;
+}
+
+.stat .label {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 0.25rem;
+}
+
+.stat span:not(.label) {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #ffd700;
+}
+
+/* Controls */
+#controls {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+#toss-btn, #reset-btn {
+  font-size: 1.2rem;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+#toss-btn {
+  background: #ffd700;
+  color: #1a1a2e;
+  font-weight: bold;
+}
+
+#toss-btn:hover:not(:disabled) {
+  background: #ffed4a;
+  transform: scale(1.05);
+}
+
+#toss-btn:disabled {
+  background: #555;
+  color: #888;
+  cursor: not-allowed;
+  transform: none;
+}
+
+#reset-btn {
+  background: #4a90d9;
+  color: white;
+  font-weight: bold;
+  margin-left: 0.5rem;
+}
+
+#reset-btn:hover {
+  background: #6aaced;
+  transform: scale(1.05);
+}
+
+/* Upgrades */
+#upgrades {
+  margin-bottom: 1.5rem;
+}
+
+#upgrade-list {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.upgrade-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  background: #16213e;
+  border: 2px solid transparent;
+}
+
+.upgrade-card.affordable {
+  border-color: #4a90d9;
+}
+
+.upgrade-card.owned {
+  border-color: #2d5016;
+  opacity: 0.8;
+}
+
+.upgrade-card.unaffordable {
+  opacity: 0.5;
+}
+
+.upgrade-card strong {
+  min-width: 120px;
+  color: #ffd700;
+}
+
+.upgrade-desc {
+  flex: 1;
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.upgrade-cost {
+  font-weight: bold;
+  color: #4a90d9;
+}
+
+.upgrade-card button {
+  padding: 0.4rem 0.75rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  background: #4a90d9;
+  color: white;
+}
+
+.upgrade-card button:disabled {
+  background: #444;
+  color: #777;
+  cursor: not-allowed;
+}
+
+.upgrade-card button:hover:not(:disabled) {
+  background: #6aaced;
+}
+
+.owned-badge {
+  color: #7fff00;
+  font-weight: bold;
+}
+
+/* History */
+#history {
+  margin-bottom: 1.5rem;
+}
+
+#history-list {
+  max-height: 250px;
+  overflow-y: auto;
+  background: #0f0f23;
+  border-radius: 8px;
+  padding: 0.5rem;
+}
+
+.history-entry {
+  padding: 0.35rem 0.5rem;
+  border-bottom: 1px solid #1a1a2e;
+  font-size: 0.85rem;
+}
+
+.history-entry:last-child {
+  border-bottom: none;
+}
+
+.history-toss {
+  color: #ccc;
+}
+
+.history-purchase {
+  color: #4a90d9;
+}
+
+.history-win {
+  color: #7fff00;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.placeholder {
+  color: #555;
+  font-style: italic;
+  padding: 0.5rem;
+}
