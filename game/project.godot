@@ -6,7 +6,7 @@
 
 config/name="The Last Toss"
 config/description="Year 50,002 — The Ritual Continues. Reach 10 consecutive heads to end the cycle."
-run/main_scene="res://scenes/main.tscn"
+run/main_scene="res://scenes/bootstrap/Bootstrap.tscn"
 config/features=PackedStringArray("4.4")
 
 [display]
