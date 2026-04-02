@@ -2,8 +2,11 @@ extends Node
 
 ## Bootstrap entry point — manages scene routing between save select and gameplay.
 
+const GameScreenScene := preload("res://scenes/game/GameScreen.tscn")
+
 var game_signals: Node
 var run_state: RunState
+var game_screen: Control
 
 func _ready() -> void:
 	# Create core singletons
@@ -15,5 +18,12 @@ func _ready() -> void:
 	run_state.name = "RunState"
 	add_child(run_state)
 
-	# Start with a new run for now (save select added in PLAN-04)
-	run_state.start_new_run("slot_1")
+	# Launch directly into gameplay (save select added in PLAN-04)
+	_start_game("slot_1")
+
+func _start_game(slot_id: String) -> void:
+	run_state.start_new_run(slot_id)
+	game_screen = GameScreenScene.instantiate()
+	add_child(game_screen)
+	if game_screen.has_method("setup"):
+		game_screen.setup(run_state)

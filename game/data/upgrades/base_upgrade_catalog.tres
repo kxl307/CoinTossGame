@@ -1,0 +1,5 @@
+[gd_resource type="Resource" format=3 uid="uid://upgcatalog001"]
+
+; Upgrade catalog data - definitions are code-driven in UpgradeCatalog.gd
+; This resource exists as a placeholder for future data-driven expansion.
+[resource]
