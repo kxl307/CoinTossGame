@@ -149,3 +149,49 @@ describe('getUpgradeCatalog', () => {
     assert.equal(catalog[2].requires, 'weighted-coin-2');
   });
 });
+
+describe('game-over boundary', () => {
+  it('toss after game-over does not change tossCount or streak', () => {
+    let s = createInitialState();
+    for (let i = 0; i < TARGET_STREAK; i++) s = resolveToss(s, 0.01);
+    assert.equal(s.gameOver, true);
+    const after = resolveToss(s, 0.01);
+    assert.equal(after.tossCount, s.tossCount);
+    assert.equal(after.currentStreak, s.currentStreak);
+    assert.equal(after.money, s.money);
+  });
+
+  it('purchase after game-over does not change money or headChance', () => {
+    let s = createInitialState();
+    s.money = 100;
+    for (let i = 0; i < TARGET_STREAK; i++) s = resolveToss(s, 0.01);
+    const after = purchaseUpgrade(s, 'weighted-coin-1');
+    assert.equal(after.money, s.money);
+    assert.equal(after.headChance, s.headChance);
+    assert.deepEqual(after.purchasedUpgradeIds, s.purchasedUpgradeIds);
+  });
+});
+
+describe('upgrade affects future toss odds', () => {
+  it('upgraded headChance changes toss outcome at boundary roll', () => {
+    let s = createInitialState();
+    // At 10% chance, roll=0.10 is tails
+    let tails = resolveToss(s, 0.10);
+    assert.equal(tails.currentStreak, 0);
+
+    // Buy upgrade to get to 11%, now roll=0.10 is heads
+    s.money = 5;
+    s = purchaseUpgrade(s, 'weighted-coin-1');
+    assert.equal(s.headChance, 0.11);
+    let heads = resolveToss(s, 0.10);
+    assert.equal(heads.currentStreak, 1);
+  });
+
+  it('failed purchase does not spend money', () => {
+    let s = createInitialState();
+    s.money = 3; // not enough for weighted-coin-1 (costs 5)
+    const next = purchaseUpgrade(s, 'weighted-coin-1');
+    assert.equal(next.money, 3);
+    assert.equal(next.headChance, INITIAL_HEAD_CHANCE);
+  });
+});
