@@ -1,0 +1,146 @@
+/* ── Reset & Base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: #1a1a2e;
+  color: #e0e0e0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+#app {
+  max-width: 520px;
+  width: 100%;
+}
+
+/* ── Header ── */
+header { text-align: center; margin-bottom: 1.5rem; }
+h1 { font-size: 1.8rem; color: #f5c842; margin-bottom: 0.4rem; }
+.rules { font-size: 0.9rem; line-height: 1.5; color: #aaa; }
+
+/* ── Stats Panel ── */
+#stats-panel {
+  display: flex;
+  justify-content: space-around;
+  background: #16213e;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1.2rem;
+}
+.stat { text-align: center; }
+.stat .label { display: block; font-size: 0.75rem; text-transform: uppercase; color: #888; margin-bottom: 0.2rem; }
+.stat .value { font-size: 1.6rem; font-weight: 700; color: #f5c842; }
+.stat .sub { font-size: 0.85rem; color: #666; }
+
+/* ── Toss Area ── */
+#toss-area { text-align: center; margin-bottom: 1.2rem; }
+
+#result-display {
+  font-size: 2.4rem;
+  min-height: 3.2rem;
+  line-height: 3.2rem;
+  margin-bottom: 0.6rem;
+}
+#result-display.heads { color: #4ade80; }
+#result-display.tails { color: #f87171; }
+
+.primary-btn {
+  font-size: 1.1rem;
+  padding: 0.7rem 2.4rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #f5c842;
+  color: #1a1a2e;
+  font-weight: 700;
+  transition: opacity 0.15s;
+}
+.primary-btn:hover { opacity: 0.85; }
+.primary-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ── Upgrade Shop ── */
+#upgrade-shop { margin-bottom: 1.2rem; }
+#upgrade-shop h2 { font-size: 1.1rem; margin-bottom: 0.6rem; color: #f5c842; }
+
+.upgrade-card {
+  background: #16213e;
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.upgrade-info { flex: 1; }
+.upgrade-name { font-weight: 600; font-size: 0.95rem; }
+.upgrade-desc { font-size: 0.8rem; color: #aaa; }
+.upgrade-btn {
+  font-size: 0.85rem;
+  padding: 0.4rem 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #4ade80;
+  color: #1a1a2e;
+  font-weight: 600;
+  transition: opacity 0.15s;
+}
+.upgrade-btn:hover { opacity: 0.85; }
+.upgrade-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+/* ── History ── */
+#history-section { margin-bottom: 1.2rem; }
+#history-section h2 { font-size: 1.1rem; margin-bottom: 0.6rem; color: #f5c842; }
+
+#history-log {
+  background: #16213e;
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  max-height: 220px;
+  overflow-y: auto;
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+#history-log:empty::after { content: 'No events yet – toss a coin!'; color: #666; }
+
+.history-entry { padding: 0.15rem 0; border-bottom: 1px solid #ffffff0a; }
+.history-entry:last-child { border-bottom: none; }
+.history-entry.head { color: #4ade80; }
+.history-entry.tail { color: #f87171; }
+.history-entry.upgrade { color: #60a5fa; }
+.history-entry.win { color: #fbbf24; font-weight: 700; }
+.history-entry.restart { color: #c084fc; }
+
+/* ── Game Over ── */
+.hidden { display: none; }
+#game-over-section {
+  text-align: center;
+  padding: 1.2rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #f5c84233, #4ade8033);
+  border-radius: 10px;
+}
+#game-over-msg { font-size: 1.3rem; font-weight: 700; color: #fbbf24; }
+
+/* ── Restart ── */
+.secondary-btn {
+  display: block;
+  width: 100%;
+  font-size: 0.95rem;
+  padding: 0.6rem;
+  border: 2px solid #444;
+  border-radius: 8px;
+  cursor: pointer;
+  background: transparent;
+  color: #aaa;
+  transition: border-color 0.15s, color 0.15s;
+}
+.secondary-btn:hover { border-color: #f5c842; color: #f5c842; }
+
+/* ── Scrollbar ── */
+#history-log::-webkit-scrollbar { width: 6px; }
+#history-log::-webkit-scrollbar-track { background: transparent; }
+#history-log::-webkit-scrollbar-thumb { background: #444; border-radius: 3px; }

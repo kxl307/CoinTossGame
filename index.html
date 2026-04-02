@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coin Toss – 10 Heads to Win</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>🪙 Coin Toss Challenge</h1>
+      <p class="rules">Get <strong>10 consecutive heads</strong> to win!<br>
+        Odds start at 10% heads / 90% tails. Earn money on heads to buy upgrades.</p>
+    </header>
+
+    <section id="stats-panel">
+      <div class="stat">
+        <span class="label">Streak</span>
+        <span id="streak" class="value">0</span>
+        <span class="sub">/ 10</span>
+      </div>
+      <div class="stat">
+        <span class="label">Head Chance</span>
+        <span id="head-chance" class="value">10%</span>
+      </div>
+      <div class="stat">
+        <span class="label">Money</span>
+        <span id="money" class="value">$0</span>
+      </div>
+    </section>
+
+    <section id="toss-area">
+      <div id="result-display"></div>
+      <button id="toss-btn" class="primary-btn">🪙 Toss Coin</button>
+    </section>
+
+    <section id="upgrade-shop">
+      <h2>Upgrade Shop</h2>
+      <div id="upgrades-list"></div>
+    </section>
+
+    <section id="history-section">
+      <h2>History</h2>
+      <div id="history-log"></div>
+    </section>
+
+    <section id="game-over-section" class="hidden">
+      <div id="game-over-msg"></div>
+    </section>
+
+    <button id="restart-btn" class="secondary-btn">🔄 Restart Game</button>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
