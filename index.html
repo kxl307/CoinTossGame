@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🪙 Coin Toss Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header id="header">
+    <h1>🪙 COIN TOSS GAME</h1>
+  </header>
+
+  <main class="game-container">
+
+    <section class="left-panel">
+      <div id="stats-card" class="card">
+        <div class="stat-money">💰 <span id="money">$0</span></div>
+        <div class="stat-row">
+          <span>Best Streak:</span>
+          <span id="best-streak">0</span>
+        </div>
+        <div class="stat-row">
+          <span>Total Tosses:</span>
+          <span id="total-tosses">0</span>
+        </div>
+        <div class="stat-row">
+          <span>Head Chance:</span>
+          <span id="head-chance">10%</span>
+        </div>
+      </div>
+
+      <div class="shop-section">
+        <h2 class="collapsible-header" data-target="shop-content">SHOP <span class="collapse-arrow">▼</span></h2>
+        <div id="shop-content" class="collapsible-content">
+          <div id="shop-cards">
+
+            <div class="shop-card" data-upgrade="headChanceBoost">
+              <div class="shop-card-name">Head Chance Boost</div>
+              <div class="shop-card-level">Level <span class="level">0</span></div>
+              <div class="shop-card-desc">+2% per level</div>
+              <div class="shop-card-cost">Cost: <span class="cost">$10</span></div>
+              <button class="buy-btn">BUY</button>
+            </div>
+
+            <div class="shop-card" data-upgrade="moneyMultiplier">
+              <div class="shop-card-name">Money Multiplier</div>
+              <div class="shop-card-level">Level <span class="level">0</span></div>
+              <div class="shop-card-desc">×1.5 earnings per level</div>
+              <div class="shop-card-cost">Cost: <span class="cost">$30</span></div>
+              <button class="buy-btn">BUY</button>
+            </div>
+
+            <div class="shop-card" data-upgrade="streakShield">
+              <div class="shop-card-name">Streak Shield</div>
+              <div class="shop-card-level"><span class="level"></span></div>
+              <div class="shop-card-desc">Blocks one tails</div>
+              <div class="shop-card-cost">Cost: <span class="cost">$25</span></div>
+              <button class="buy-btn">BUY</button>
+            </div>
+
+            <div class="shop-card" data-upgrade="luckyToss">
+              <div class="shop-card-name">Lucky Toss</div>
+              <div class="shop-card-level"><span class="level"></span></div>
+              <div class="shop-card-desc">Guarantees heads</div>
+              <div class="shop-card-cost">Cost: <span class="cost">$50</span></div>
+              <button class="buy-btn">BUY</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <button id="new-game-btn">🔄 New Game</button>
+    </section>
+
+    <section class="center-panel">
+      <div id="streak-indicator">
+        <div id="streak-stars">
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+        </div>
+        <div id="streak-text">0 / 10 consecutive heads</div>
+        <span id="shield-icon" class="hidden">🛡️</span>
+      </div>
+
+      <div id="coin-container">
+        <div id="coin">
+          <div class="coin-face coin-heads">H</div>
+          <div class="coin-face coin-tails">T</div>
+        </div>
+      </div>
+
+      <div id="money-popup-container"></div>
+
+      <button id="toss-btn" aria-label="Toss coin">🎲 TOSS COIN</button>
+    </section>
+
+    <section class="right-panel">
+      <h2 class="collapsible-header" data-target="history-content">HISTORY <span class="collapse-arrow">▼</span></h2>
+      <div id="history-content" class="collapsible-content">
+        <div id="history-log" role="log" aria-label="Game history">
+          <div class="history-placeholder">No events yet. Toss a coin!</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Victory Modal Overlay -->
+  <div id="victory-overlay" class="overlay hidden">
+    <div id="victory-modal" class="modal-card">
+      <h2>🎉 YOU WIN! 🎉</h2>
+      <p>10 Consecutive Heads Achieved!</p>
+      <hr>
+      <h3>📊 Game Stats</h3>
+      <div class="victory-stats">
+        <div class="stat-row">
+          <span>Total Tosses:</span>
+          <span id="victory-tosses"></span>
+        </div>
+        <div class="stat-row">
+          <span>Money Earned:</span>
+          <span id="victory-money"></span>
+        </div>
+        <div class="stat-row">
+          <span>Best Streak:</span>
+          <span id="victory-streak"></span>
+        </div>
+        <div class="stat-row">
+          <span>Upgrades Bought:</span>
+          <span id="victory-upgrades"></span>
+        </div>
+        <div class="stat-row">
+          <span>Head Chance:</span>
+          <span id="victory-head-chance"></span>
+        </div>
+      </div>
+      <hr>
+      <button id="play-again-btn">🔄 PLAY AGAIN</button>
+    </div>
+  </div>
+
+  <!-- New Game Confirmation Dialog -->
+  <div id="newgame-overlay" class="overlay hidden">
+    <div id="newgame-dialog" class="modal-card small">
+      <p>Are you sure you want to start a new game?</p>
+      <p class="muted">All progress will be lost.</p>
+      <div class="dialog-buttons">
+        <button id="cancel-newgame-btn" class="btn-secondary">Cancel</button>
+        <button id="confirm-newgame-btn" class="btn-danger">New Game</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>Made with 🪙 | CoinTossGame</p>
+  </footer>
+
+  <!-- Accessibility live region -->
+  <div id="aria-announcer" class="sr-only" aria-live="polite" role="status"></div>
+
+  <script src="game.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,844 @@
+/* ========================================
+   Section 1: CSS Custom Properties (Design System)
+   ======================================== */
+:root {
+  --bg-primary: #1a1a2e;
+  --bg-card: #16213e;
+  --bg-card-hover: #1a2744;
+  --accent-gold: #FFD700;
+  --accent-gold-dim: rgba(255, 215, 0, 0.3);
+  --text-primary: #e0e0e0;
+  --text-heading: #ffffff;
+  --text-muted: #888888;
+  --success: #4CAF50;
+  --danger: #f44336;
+  --info: #2196F3;
+  --shield-blue: #42A5F5;
+  --radius-card: 12px;
+  --radius-btn: 8px;
+  --font-main: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-mono: 'SF Mono', 'Cascadia Code', 'Consolas', monospace;
+}
+
+/* ========================================
+   Section 2: Reset + Base Styles
+   ======================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* ========================================
+   Section 3: Header
+   ======================================== */
+#header {
+  text-align: center;
+  padding: 16px 0;
+}
+
+#header h1 {
+  color: var(--text-heading);
+  font-size: 1.6rem;
+  text-shadow: 0 0 20px var(--accent-gold-dim);
+  letter-spacing: 2px;
+}
+
+/* ========================================
+   Section 4: Game Container — CSS Grid Layout
+   ======================================== */
+.game-container {
+  display: grid;
+  grid-template-columns: 280px 1fr 300px;
+  gap: 24px;
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: calc(100vh - 80px);
+  flex: 1;
+  width: 100%;
+}
+
+/* ========================================
+   Section 5: Left Panel (Stats + Shop)
+   ======================================== */
+.left-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#stats-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-card);
+  padding: 16px;
+}
+
+.stat-money {
+  font-size: 1.8rem;
+  font-family: var(--font-mono);
+  color: var(--accent-gold);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  font-size: 0.9rem;
+}
+
+.stat-row span:last-child {
+  font-family: var(--font-mono);
+}
+
+.shop-section h2,
+.right-panel h2 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+/* ========================================
+   Section 6: Shop Cards
+   ======================================== */
+.shop-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-card);
+  padding: 16px;
+  margin-bottom: 12px;
+  transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
+}
+
+.shop-card.affordable {
+  border-color: var(--accent-gold-dim);
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.1);
+}
+
+.shop-card.affordable:hover {
+  background: var(--bg-card-hover);
+}
+
+.shop-card.cant-afford .buy-btn {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.shop-card.maxed {
+  opacity: 0.6;
+}
+
+.shop-card.maxed .buy-btn {
+  display: none;
+}
+
+.shop-card-name {
+  font-weight: 700;
+  color: var(--text-heading);
+  margin-bottom: 4px;
+}
+
+.shop-card-level {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.shop-card-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin: 4px 0;
+}
+
+.shop-card-cost {
+  font-family: var(--font-mono);
+  margin: 8px 0;
+  font-size: 0.9rem;
+}
+
+.shop-card-cost .cost {
+  color: var(--accent-gold);
+  font-weight: 700;
+}
+
+.buy-btn {
+  width: 100%;
+  padding: 8px;
+  background: var(--accent-gold);
+  color: #1a1a2e;
+  font-weight: 700;
+  border: none;
+  border-radius: var(--radius-btn);
+  cursor: pointer;
+  transition: transform 0.1s, filter 0.2s;
+  font-size: 0.85rem;
+}
+
+.buy-btn:hover {
+  filter: brightness(1.1);
+}
+
+.buy-btn:active {
+  transform: scale(0.95);
+}
+
+.buy-btn:disabled {
+  background: #555;
+  color: #888;
+  cursor: not-allowed;
+  filter: none;
+}
+
+.consumable-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-weight: 700;
+  margin-left: 8px;
+}
+
+.consumable-badge.ready {
+  background: rgba(76, 175, 80, 0.2);
+  color: var(--success);
+}
+
+.consumable-badge.use {
+  background: rgba(33, 150, 243, 0.2);
+  color: var(--info);
+}
+
+/* ========================================
+   Section 7: Center Panel (Coin + Toss)
+   ======================================== */
+.center-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+/* Streak Indicator */
+#streak-indicator {
+  text-align: center;
+}
+
+#streak-stars {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.star {
+  color: #555;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.star.filled {
+  color: var(--accent-gold);
+}
+
+#streak-text {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+
+#shield-icon {
+  margin-left: 8px;
+  font-size: 1.2rem;
+}
+
+.shield-active #streak-indicator {
+  border: 2px solid var(--shield-blue);
+  border-radius: var(--radius-card);
+  padding: 8px;
+  box-shadow: 0 0 10px rgba(66, 165, 245, 0.3);
+  animation: shield-glow 2s ease-in-out infinite;
+}
+
+/* Coin */
+#coin-container {
+  perspective: 800px;
+  width: 150px;
+  height: 150px;
+}
+
+#coin {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.coin-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.coin-heads {
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  color: #1a1a2e;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.coin-tails {
+  background: linear-gradient(135deg, #555, #777);
+  color: #ddd;
+  transform: rotateY(180deg);
+}
+
+/* Toss Button */
+#toss-btn {
+  width: 200px;
+  height: 56px;
+  background: var(--accent-gold);
+  color: #1a1a2e;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: var(--radius-btn);
+  cursor: pointer;
+  position: relative;
+  transition: filter 0.2s, transform 0.1s, box-shadow 0.3s;
+}
+
+#toss-btn:hover:not(:disabled) {
+  filter: brightness(1.1);
+  box-shadow: 0 0 25px var(--accent-gold-dim);
+}
+
+#toss-btn:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+#toss-btn:disabled {
+  background: #555;
+  color: #888;
+  cursor: not-allowed;
+  box-shadow: none;
+  animation: none;
+}
+
+#toss-btn:not(:disabled) {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.lucky-active #toss-btn:not(:disabled) {
+  box-shadow: 0 0 20px rgba(33, 150, 243, 0.5);
+  animation: none;
+}
+
+/* Money Popup */
+#money-popup-container {
+  position: relative;
+  height: 0;
+  width: 100%;
+}
+
+.money-popup {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--success);
+  font-weight: 700;
+  font-size: 1.2rem;
+  pointer-events: none;
+  animation: float-up 1s ease-out forwards;
+}
+
+/* ========================================
+   Section 8: Right Panel (History)
+   ======================================== */
+.right-panel h2 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+#history-log {
+  max-height: 60vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.history-entry {
+  padding: 8px 12px;
+  border-left: 3px solid;
+  font-size: 0.85rem;
+  animation: slide-in 0.3s ease-out;
+  border-radius: 0 4px 4px 0;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.history-entry:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.history-entry.heads {
+  border-color: var(--success);
+  color: var(--success);
+}
+
+.history-entry.tails {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.history-entry.purchase {
+  border-color: var(--info);
+  color: var(--info);
+}
+
+.history-entry.milestone {
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+  font-weight: 700;
+}
+
+.history-entry.shield {
+  border-color: var(--shield-blue);
+  color: var(--shield-blue);
+}
+
+.history-entry.lucky {
+  border-color: var(--info);
+  color: var(--info);
+}
+
+.history-placeholder {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 24px 12px;
+  font-style: italic;
+}
+
+/* ========================================
+   Section 9: Victory Overlay + Modal
+   ======================================== */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-card {
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 450px;
+  width: 90%;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-card h2 {
+  color: var(--accent-gold);
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+}
+
+.modal-card h3 {
+  color: var(--text-heading);
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+}
+
+.modal-card p {
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.modal-card .muted {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.modal-card hr {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 16px 0;
+}
+
+.victory-stats .stat-row {
+  justify-content: space-between;
+  padding: 6px 0;
+}
+
+.victory-stats .stat-row span:last-child {
+  font-family: var(--font-mono);
+  color: var(--accent-gold);
+}
+
+#play-again-btn {
+  width: 200px;
+  height: 56px;
+  background: var(--accent-gold);
+  color: #1a1a2e;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: var(--radius-btn);
+  cursor: pointer;
+  margin-top: 8px;
+  transition: filter 0.2s, transform 0.1s;
+}
+
+#play-again-btn:hover {
+  filter: brightness(1.1);
+}
+
+#play-again-btn:active {
+  transform: scale(0.95);
+}
+
+.modal-card.small {
+  max-width: 320px;
+}
+
+.dialog-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid #888;
+  color: #888;
+  padding: 10px 20px;
+  border-radius: var(--radius-btn);
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.btn-secondary:hover {
+  border-color: var(--text-primary);
+  color: var(--text-primary);
+}
+
+.btn-danger {
+  background: var(--danger);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: var(--radius-btn);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 700;
+  transition: filter 0.2s;
+}
+
+.btn-danger:hover {
+  filter: brightness(1.1);
+}
+
+/* ========================================
+   Section 10: New Game Button
+   ======================================== */
+#new-game-btn {
+  width: 100%;
+  padding: 10px;
+  background: transparent;
+  border: 1px solid #555;
+  color: var(--text-muted);
+  border-radius: var(--radius-btn);
+  cursor: pointer;
+  margin-top: 12px;
+  font-size: 0.9rem;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+#new-game-btn:hover {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+/* ========================================
+   Section 10b: Footer
+   ======================================== */
+.footer {
+  text-align: center;
+  padding: 16px;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  margin-top: auto;
+}
+
+/* ========================================
+   Section 11: Animation Keyframes
+   ======================================== */
+@keyframes flip-to-heads {
+  0% { transform: rotateY(0deg) scale(1); }
+  50% { transform: rotateY(360deg) scale(1.1); }
+  100% { transform: rotateY(720deg) scale(1); }
+}
+
+@keyframes flip-to-tails {
+  0% { transform: rotateY(0deg) scale(1); }
+  50% { transform: rotateY(450deg) scale(1.1); }
+  100% { transform: rotateY(900deg) scale(1); }
+}
+
+@keyframes star-fill {
+  0% { transform: scale(0.5); opacity: 0.5; }
+  70% { transform: scale(1.2); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes star-reset {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(0.5); opacity: 0; }
+}
+
+@keyframes float-up {
+  0% { transform: translateX(-50%) translateY(0); opacity: 1; }
+  100% { transform: translateX(-50%) translateY(-40px); opacity: 0; }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-5px); }
+  40% { transform: translateX(5px); }
+  60% { transform: translateX(-5px); }
+  80% { transform: translateX(5px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.6); }
+}
+
+@keyframes slide-up {
+  0% { transform: translateY(50px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slide-in {
+  0% { transform: translateY(-20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes shield-glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(66, 165, 245, 0.3); }
+  50% { box-shadow: 0 0 15px rgba(66, 165, 245, 0.6); }
+}
+
+@keyframes fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes success-flash {
+  0% { border-color: var(--success); box-shadow: 0 0 10px rgba(76, 175, 80, 0.5); }
+  100% { border-color: rgba(255, 255, 255, 0.1); box-shadow: none; }
+}
+
+@keyframes flash-red {
+  0%, 100% { color: var(--accent-gold); }
+  50% { color: var(--danger); }
+}
+
+@keyframes flash-green {
+  0%, 100% { color: var(--accent-gold); }
+  50% { color: var(--success); }
+}
+
+/* Animation utility classes */
+.flipping-heads #coin {
+  animation: flip-to-heads 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.flipping-tails #coin {
+  animation: flip-to-tails 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.star.filling {
+  animation: star-fill 0.3s ease-out forwards;
+}
+
+.star.resetting {
+  animation: star-reset 0.4s ease-in forwards;
+}
+
+.shake {
+  animation: shake 0.4s linear;
+}
+
+.flash-red {
+  animation: flash-red 0.4s ease;
+}
+
+.flash-green {
+  animation: flash-green 0.4s ease;
+}
+
+.success-flash {
+  animation: success-flash 0.5s ease-out;
+}
+
+.victory-entering .modal-card {
+  animation: slide-up 0.6s ease-out;
+}
+
+.victory-entering {
+  animation: fade-in 0.3s ease-out;
+}
+
+/* ========================================
+   Section 12: Screen Reader Only
+   ======================================== */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ========================================
+   Section 13: Hidden utility
+   ======================================== */
+.hidden {
+  display: none !important;
+}
+
+/* ========================================
+   Section 14: Responsive — Mobile (<768px)
+   ======================================== */
+@media (max-width: 767px) {
+  .game-container {
+    grid-template-columns: 1fr;
+    padding: 12px;
+    gap: 16px;
+  }
+
+  .center-panel { order: 1; }
+  .left-panel { order: 2; }
+  .right-panel { order: 3; }
+
+  #stats-card {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    align-items: center;
+  }
+
+  .stat-money {
+    flex: 0 0 100%;
+  }
+
+  #shop-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .shop-card {
+    margin-bottom: 0;
+  }
+
+  #coin-container {
+    width: 120px;
+    height: 120px;
+  }
+
+  #toss-btn {
+    width: 100%;
+  }
+
+  #history-log {
+    max-height: 300px;
+  }
+
+  .collapsible-header {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+  }
+
+  .collapse-arrow {
+    transition: transform 0.2s;
+  }
+
+  .collapsed .collapse-arrow {
+    transform: rotate(-90deg);
+  }
+
+  .collapsed .collapsible-content {
+    display: none;
+  }
+}
+
+/* Desktop: hide collapse arrows */
+@media (min-width: 768px) {
+  .collapse-arrow {
+    display: none;
+  }
+}
+
+/* ========================================
+   Section 15: Focus styles for accessibility
+   ======================================== */
+button:focus-visible,
+.shop-card:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 2px;
+}
