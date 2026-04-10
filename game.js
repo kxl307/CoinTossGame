@@ -100,6 +100,8 @@
 
   function animateClass(el, className, duration) {
     if (!el) return;
+    el.classList.remove(className);
+    void el.offsetWidth; // force reflow to restart animation
     el.classList.add(className);
     setTimeout(function() {
       el.classList.remove(className);
@@ -306,15 +308,26 @@
 
     state.totalTosses++;
 
-    // Trigger coin flip animation
+    // Trigger coin flip animation — reset position first
     dom.coinContainer.classList.remove('flipping-heads', 'flipping-tails');
-    void dom.coinContainer.offsetWidth; // force reflow
+    dom.coin.style.transition = 'none';
+    dom.coin.style.transform = 'rotateY(0deg)';
+    void dom.coin.offsetWidth; // force reflow
+    dom.coin.style.transition = '';
     dom.coinContainer.classList.add(result === 'heads' ? 'flipping-heads' : 'flipping-tails');
 
     setTimeout(function() {
       processResult(result, usedLucky);
+      // Remove animation and set final resting position without triggering transition
+      dom.coin.style.transition = 'none';
       dom.coinContainer.classList.remove('flipping-heads', 'flipping-tails');
-      renderAll();
+      dom.coin.style.transform = result === 'heads' ? 'rotateY(0deg)' : 'rotateY(180deg)';
+      void dom.coin.offsetWidth; // force reflow
+      dom.coin.style.transition = '';
+      renderStats();
+      renderStreak();
+      renderShop();
+      renderTossButton();
       saveGame();
       isTossing = false;
       if (!state.gameWon) {
@@ -440,7 +453,10 @@
     addHistoryEntry('purchase', historyText);
     animateClass(card, 'success-flash', 500);
     animateClass(dom.money.parentElement, 'flash-red', 400);
-    renderAll();
+    renderStats();
+    renderStreak();
+    renderShop();
+    renderTossButton();
     saveGame();
   }
 
